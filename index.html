@@ -17,16 +17,6 @@ html, body {
   position: relative;
 }
 
-body::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top:0;
-  left:0;
-  z-index:1;
-}
-
 .container {
   position: absolute;
   top:50%;
@@ -75,9 +65,7 @@ button {
   position:relative;
 }
 
-button:hover {
-  transform: scale(1.1);
-}
+button:hover { transform: scale(1.1); }
 
 .error-msg {
   position:absolute;
@@ -182,20 +170,32 @@ const content = document.getElementById('content');
 const errorMsg = document.getElementById('errorMsg');
 const yaySound = document.getElementById('yaySound');
 
-// Evade function for touch/mouse
-function evadeButton(btn){
-  btn.addEventListener('mouseenter', moveButton);
-  btn.addEventListener('touchstart', moveButton);
-  function moveButton(e){
-    const x = Math.random()*200-100;
-    const y = Math.random()*100-50;
-    btn.style.transform = `translate(${x}px,${y}px)`;
-    errorMsg.style.opacity = 1;
-    setTimeout(()=>errorMsg.style.opacity=0, 1000);
-  }
+// Evade "No" button
+noBtn.addEventListener('mouseenter', moveNo);
+noBtn.addEventListener('touchstart', moveNo);
+
+function moveNo(e){
+  const x = Math.random()*200-100;
+  const y = Math.random()*100-50;
+  noBtn.style.transform = `translate(${x}px,${y}px)`;
+  showError("Nope! Wrong choice 😜 Try again!");
 }
-evadeButton(noBtn);
-evadeButton(maybeBtn);
+
+// Stop "Maybe" button and show funny message
+maybeBtn.addEventListener('mouseenter', stopMaybe);
+maybeBtn.addEventListener('touchstart', stopMaybe);
+
+function stopMaybe(e){
+  maybeBtn.style.transform = 'translate(0,0)';
+  showError("Haha! You can't be indecisive! 😏");
+}
+
+// Function to show error message
+function showError(msg){
+  errorMsg.textContent = msg;
+  errorMsg.style.opacity = 1;
+  setTimeout(()=>errorMsg.style.opacity=0, 1500);
+}
 
 // Yes button
 yesBtn.addEventListener('click', ()=>{
@@ -266,7 +266,6 @@ function createParticles(){
   }
 }
 createParticles();
-
 </script>
 
 </body>
