@@ -1,283 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ask Naomi Out 💖</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask Naomi Out 💖</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
 
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      overflow: hidden;
-      background: linear-gradient(135deg, #f9c5d1, #c6e2ff);
-      position: relative;
-    }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f9c5d1, #c6e2ff);
+  position: relative;
+}
 
-    /* Particle background */
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.4;
-      pointer-events: none;
-      animation: float 15s linear infinite;
-    }
+body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left:0;
+  z-index:1;
+}
 
-    @keyframes float {
-      0% { transform: translateY(100vh) translateX(0); }
-      100% { transform: translateY(-50px) translateX(100px); }
-    }
+.container {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index:10;
+  color:#fff;
+  pointer-events:none;
+}
 
-    /* Flower petals */
-    .petal {
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      background: pink;
-      opacity: 0.8;
-      border-radius: 50%;
-      transform: rotate(45deg);
-      animation: fall linear infinite;
-      z-index: 2;
-    }
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size:3rem;
+  margin-bottom:20px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+}
 
-    @keyframes fall {
-      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-    }
+p {
+  font-size:1.3rem;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.2);
+}
 
-    .container {
-      text-align: center;
-      background: rgba(255,255,255,0.9);
-      padding: 50px 40px;
-      border-radius: 30px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-      position: relative;
-      z-index: 10;
-      max-width: 90%;
-      margin: auto;
-      transition: transform 0.5s ease;
-    }
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  pointer-events:auto;
+}
 
-    h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 3rem;
-      color: #ff5eaa;
-      margin-bottom: 20px;
-      word-wrap: break-word;
-      transition: transform 0.5s ease;
-    }
+button {
+  padding: 12px 25px;
+  font-size:1rem;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  background: linear-gradient(135deg, #ff9ac2, #ff5eaa);
+  color:white;
+  font-weight:600;
+  min-width:80px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  touch-action: manipulation;
+  position:relative;
+}
 
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-      color: #555;
-      transition: transform 0.5s ease;
-      word-wrap: break-word;
-    }
+button:hover {
+  transform: scale(1.1);
+}
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
+.error-msg {
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform: translateX(-50%);
+  font-weight:bold;
+  color:#fff;
+  text-shadow:1px 1px 5px rgba(0,0,0,0.3);
+  font-size:1rem;
+  opacity:0;
+  transition: opacity 0.3s ease;
+  z-index:20;
+}
 
-    button {
-      padding: 12px 25px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      background: linear-gradient(135deg, #ff9ac2, #ff5eaa);
-      color: white;
-      font-weight: 600;
-      min-width: 80px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
+/* Hearts */
+.heart {
+  position:absolute;
+  width:15px;
+  height:15px;
+  background:#ff8ac2;
+  transform:rotate(45deg);
+  animation: floatUp 3s linear forwards;
+  opacity:0.8;
+  z-index:5;
+}
+.heart::before,.heart::after {
+  content:"";
+  position:absolute;
+  width:15px;
+  height:15px;
+  background:#ff8ac2;
+  border-radius:50%;
+}
+.heart::before { top:-7.5px; left:0; }
+.heart::after { left:7.5px; top:0; }
+@keyframes floatUp { 0%{transform:translateY(0) rotate(45deg);opacity:1;} 100%{transform:translateY(-250px) rotate(45deg);opacity:0;} }
 
-    button:hover {
-      transform: scale(1.1);
-    }
+/* Confetti */
+.confetti {
+  position:absolute;
+  width:8px;
+  height:8px;
+  top:0;
+  border-radius:50%;
+  opacity:0.8;
+  z-index:5;
+}
 
-    #yesBtn.animate {
-      animation: pop 0.5s ease forwards;
-    }
+/* Bouncing and scaling animations */
+.bounce { animation:bounce 1s infinite alternate; }
+@keyframes bounce { 0%{transform:translateY(0);}50%{transform:translateY(-15px);}100%{transform:translateY(0);} }
+.scaleUp { animation:scaleUp 1s ease forwards; }
+@keyframes scaleUp { 0%{transform:scale(1);}50%{transform:scale(1.3);}100%{transform:scale(1);} }
 
-    @keyframes pop {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.5); }
-      100% { transform: scale(1); }
-    }
+/* Flower petals */
+.petal {
+  position:absolute;
+  width:15px;
+  height:15px;
+  background:pink;
+  opacity:0.8;
+  border-radius:50%;
+  transform:rotate(45deg);
+  animation:fall linear infinite;
+  z-index:2;
+}
+@keyframes fall {
+  0% { transform: translateY(-10px) rotate(0deg); opacity:1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity:0; }
+}
 
-    .heart {
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      background: #ff8ac2;
-      transform: rotate(45deg);
-      animation: floatUp 3s linear forwards;
-      opacity: 0.8;
-      z-index: 5;
-    }
-
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      background: #ff8ac2;
-      border-radius: 50%;
-    }
-
-    .heart::before { top: -7.5px; left: 0; }
-    .heart::after { left: 7.5px; top: 0; }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
-      100% { transform: translateY(-250px) rotate(45deg); opacity: 0; }
-    }
-
-    .confetti {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      top: 0;
-      border-radius: 50%;
-      opacity: 0.8;
-      z-index: 5;
-    }
-
-    .bounce { animation: bounce 1s infinite alternate; }
-    @keyframes bounce { 0% { transform: translateY(0); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
-
-    .scaleUp { animation: scaleUp 1s ease forwards; }
-    @keyframes scaleUp { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      h1 { font-size: 2.5rem; }
-      p { font-size: 1rem; }
-      button { padding: 10px 20px; font-size: 0.95rem; }
-    }
-
-    @media (max-width: 480px) {
-      h1 { font-size: 2rem; }
-      p { font-size: 0.9rem; }
-      button { padding: 8px 18px; font-size: 0.85rem; min-width: 70px; }
-    }
-
-  </style>
+/* Responsive */
+@media (max-width:480px){
+  h1{font-size:2rem;}
+  p{font-size:0.9rem;}
+  button{padding:8px 18px;font-size:0.85rem;min-width:70px;}
+}
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Hey Naomi 💖</h1>
-    <p>"You are the sunshine that brightens my day… Will you be my girlfriend?"</p>
-    <div class="buttons">
-      <button id="yesBtn">Yes</button>
-      <button id="noBtn">No</button>
-      <button id="maybeBtn">Maybe</button>
-    </div>
+
+<div class="error-msg" id="errorMsg">Nope! Wrong choice 😜 Try again!</div>
+
+<div class="container" id="content">
+  <h1>Hey Naomi 💖</h1>
+  <p>"You are the sunshine that brightens my day… Will you be my girlfriend?"</p>
+  <div class="buttons">
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+    <button id="maybeBtn">Maybe</button>
   </div>
+</div>
 
-  <audio id="yaySound" src="https://www.soundjay.com/human/cheer-01.mp3"></audio>
+<audio id="yaySound" src="https://www.soundjay.com/human/cheer-01.mp3"></audio>
 
-  <script>
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');
-    const maybeBtn = document.getElementById('maybeBtn');
-    const container = document.querySelector('.container');
-    const yaySound = document.getElementById('yaySound');
+<script>
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+const maybeBtn = document.getElementById('maybeBtn');
+const content = document.getElementById('content');
+const errorMsg = document.getElementById('errorMsg');
+const yaySound = document.getElementById('yaySound');
 
-    // Evade No and Maybe
-    function evadeButton(btn) {
-      btn.addEventListener('mouseover', () => {
-        const x = Math.random() * 200 - 100;
-        const y = Math.random() * 100 - 50;
-        btn.style.transform = `translate(${x}px, ${y}px)`;
-      });
-    }
-    evadeButton(noBtn);
-    evadeButton(maybeBtn);
+// Evade function for touch/mouse
+function evadeButton(btn){
+  btn.addEventListener('mouseenter', moveButton);
+  btn.addEventListener('touchstart', moveButton);
+  function moveButton(e){
+    const x = Math.random()*200-100;
+    const y = Math.random()*100-50;
+    btn.style.transform = `translate(${x}px,${y}px)`;
+    errorMsg.style.opacity = 1;
+    setTimeout(()=>errorMsg.style.opacity=0, 1000);
+  }
+}
+evadeButton(noBtn);
+evadeButton(maybeBtn);
 
-    yesBtn.addEventListener('click', () => {
-      yaySound.play();
-      container.innerHTML = `
-        <h1 id="yayText">Yay! 💖</h1>
-        <p id="yayMsg">I'm so happy! Can't wait to make amazing memories together!</p>
-      `;
-      createConfetti();
-      createHearts();
-      animateText();
-      createPetals(50);
-    });
+// Yes button
+yesBtn.addEventListener('click', ()=>{
+  yaySound.play();
+  content.innerHTML = `
+    <h1 id="yayText">Yay! 💖</h1>
+    <p id="yayMsg">I'm so happy! Can't wait to make amazing memories together!</p>
+  `;
+  createConfetti();
+  createHearts();
+  createPetals(50);
+  animateText();
+});
 
-    function createConfetti() {
-      for (let i = 0; i < 100; i++) {
-        const confetti = document.createElement('div');
-        confetti.classList.add('confetti');
-        confetti.style.left = Math.random() * window.innerWidth + 'px';
-        confetti.style.background = `hsl(${Math.random() * 360}, 80%, 70%)`;
-        confetti.style.animation = `fall ${2 + Math.random() * 2}s linear forwards`;
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 4000);
-      }
-    }
+// Animations
+function createConfetti(){
+  for(let i=0;i<100;i++){
+    const c=document.createElement('div');
+    c.classList.add('confetti');
+    c.style.left=Math.random()*window.innerWidth+'px';
+    c.style.background=`hsl(${Math.random()*360},80%,70%)`;
+    c.style.animation=`fall ${2+Math.random()*2}s linear forwards`;
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),4000);
+  }
+}
+function createHearts(){
+  for(let i=0;i<30;i++){
+    const h=document.createElement('div');
+    h.classList.add('heart');
+    h.style.left=Math.random()*window.innerWidth+'px';
+    h.style.animationDuration=2+Math.random()*2+'s';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  }
+}
+function animateText(){
+  const text=document.getElementById('yayText');
+  const msg=document.getElementById('yayMsg');
+  text.classList.add('bounce');
+  msg.classList.add('scaleUp');
+}
+function createPetals(count){
+  for(let i=0;i<count;i++){
+    const p=document.createElement('div');
+    p.classList.add('petal');
+    p.style.left=Math.random()*window.innerWidth+'px';
+    p.style.width=p.style.height=10+Math.random()*15+'px';
+    p.style.background=`hsla(${Math.random()*360},80%,80%,0.7)`;
+    p.style.animationDuration=5+Math.random()*5+'s';
+    p.style.animationDelay=Math.random()*2+'s';
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),7000);
+  }
+}
 
-    function createHearts() {
-      for (let i = 0; i < 30; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.style.left = Math.random() * window.innerWidth + 'px';
-        heart.style.animationDuration = 2 + Math.random() * 2 + 's';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 4000);
-      }
-    }
+// Background particles
+function createParticles(){
+  for(let i=0;i<50;i++){
+    const particle=document.createElement('div');
+    particle.classList.add('particle');
+    particle.style.width=particle.style.height=5+Math.random()*10+'px';
+    particle.style.background=`hsla(${Math.random()*360},70%,85%,0.5)`;
+    particle.style.left=Math.random()*window.innerWidth+'px';
+    particle.style.top=Math.random()*window.innerHeight+'px';
+    particle.style.animationDuration=10+Math.random()*10+'s';
+    document.body.appendChild(particle);
+  }
+}
+createParticles();
 
-    function animateText() {
-      const text = document.getElementById('yayText');
-      const msg = document.getElementById('yayMsg');
-      text.classList.add('bounce');
-      msg.classList.add('scaleUp');
-    }
+</script>
 
-    // Flower petal rain
-    function createPetals(count) {
-      for (let i = 0; i < count; i++) {
-        const petal = document.createElement('div');
-        petal.classList.add('petal');
-        petal.style.left = Math.random() * window.innerWidth + 'px';
-        petal.style.width = petal.style.height = 10 + Math.random() * 15 + 'px';
-        petal.style.background = `hsla(${Math.random() * 360}, 80%, 80%, 0.7)`;
-        petal.style.animationDuration = 5 + Math.random() * 5 + 's';
-        petal.style.animationDelay = Math.random() * 2 + 's';
-        document.body.appendChild(petal);
-        setTimeout(() => petal.remove(), 7000);
-      }
-    }
-
-    // Initial background particles
-    function createParticles() {
-      for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        particle.style.width = particle.style.height = 5 + Math.random() * 10 + 'px';
-        particle.style.background = `hsla(${Math.random()*360}, 70%, 85%, 0.5)`;
-        particle.style.left = Math.random() * window.innerWidth + 'px';
-        particle.style.top = Math.random() * window.innerHeight + 'px';
-        particle.style.animationDuration = 10 + Math.random() * 10 + 's';
-        document.body.appendChild(particle);
-      }
-    }
-
-    createParticles();
-
-  </script>
 </body>
 </html>
