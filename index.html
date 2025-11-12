@@ -152,7 +152,7 @@ button:hover { transform: scale(1.1); }
 
 <div class="container" id="content">
   <h1> Hey Nomi 💖</h1>
-  <p>You are the sunshine that brightens my day. I’ve known for a while maybe from the very first moment we met but I still want to ask… Naomi, will you please be my girlfriend?</p>
+  <p>You are the sunshine that brightens my day. I’ve known for a while maybe from the very first moment we met but I still want to ask… will you please be my girlfriend?</p>
   <div class="buttons">
     <button id="yesBtn">Yes</button>
     <button id="noBtn">No</button>
@@ -178,7 +178,7 @@ function moveNo(e){
   const x = Math.random()*200-100;
   const y = Math.random()*100-50;
   noBtn.style.transform = `translate(${x}px,${y}px)`;
-  showError("Nope! Wrong choice 😜 Try again!");
+  showError("Nope! Wrong choice. Try again!");
 }
 
 // Stop "Maybe" button and show funny message
@@ -202,7 +202,7 @@ yesBtn.addEventListener('click', ()=>{
   yaySound.play();
   content.innerHTML = `
     <h1 id="yayText">Yay! 💖</h1>
-    <p id="yayMsg">I'm so happy! Can't wait to make amazing memories together!</p>
+    <p id="yayMsg">You’re officially stuck with me now 💖 (sorry, not sorry)</p>
   `;
   createConfetti();
   createHearts();
